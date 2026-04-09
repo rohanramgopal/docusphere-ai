@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DocuSphere AI</title>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+    <div class="page-bg candidate-bg">
+        <nav class="navbar glass">
+            <div class="brand hero-brand">DocuSphere AI</div>
+            <div class="nav-right">
+                <a href="/employer/login" class="nav-btn">Employer Login</a>
+            </div>
+        </nav>
+
+        <main class="container">
+            <section class="hero glass hero-highlight">
+                <span class="hero-tag">Intelligent Document Processing Platform</span>
+                <h1>Upload Your Documents</h1>
+                <p class="hero-description">
+                    Upload your documents securely for intelligent review. The system organizes,
+                    analyzes, and highlights key information so the right team can review your
+                    submission and reach out when needed.
+                </p>
+            </section>
+
+            <section class="upload-card glass upload-panel">
+                <div class="panel-head">
+                    <h2>Document Submission</h2>
+                    <p class="panel-subtitle">Fast, secure, and ready for professional review.</p>
+                </div>
+
+                <form action="/submit" method="post" enctype="multipart/form-data">
+                    <label>Your Name</label>
+                    <input type="text" name="candidate_name" placeholder="Enter your full name" required />
+
+                    <label>Upload File</label>
+                    <input type="file" name="file" required />
+
+                    <button type="submit" class="submit-btn">Submit Documents</button>
+                </form>
+
+                <p class="hint">Supported: PDF, TXT, DOCX, PNG, JPG, JPEG.</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

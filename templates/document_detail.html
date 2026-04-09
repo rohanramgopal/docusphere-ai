@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Document Detail</title>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+    <div class="page-bg">
+        <nav class="navbar glass">
+            <div class="brand">Document Detail</div>
+            <div class="nav-right">
+                <a href="/employer/documents" class="nav-btn">Back</a>
+                <a href="/employer/documents/{{ doc.id }}/download" class="nav-btn">Download</a>
+                <a href="/logout" class="nav-btn">Logout</a>
+            </div>
+        </nav>
+
+        <main class="container">
+            <section class="glass section-card">
+                <h1>{{ doc.candidate_name }}</h1>
+                <div class="detail-grid">
+                    <div class="detail-item"><strong>File</strong><span>{{ doc.filename }}</span></div>
+                    <div class="detail-item"><strong>Type</strong><span>{{ doc.document_type }}</span></div>
+                    <div class="detail-item"><strong>Priority</strong><span>{{ fields.get("priority", "low")|upper }}</span></div>
+                    <div class="detail-item"><strong>Created At</strong><span>{{ doc.created_at }}</span></div>
+                </div>
+            </section>
+
+            <section class="glass section-card">
+                <h2>Top 5 Highlights</h2>
+                <p>{{ doc.summary }}</p>
+            </section>
+
+            <section class="glass section-card">
+                <h2>Triggered Actions</h2>
+                {% if fields.get("actions") %}
+                <div class="doc-grid">
+                    {% for action in fields.get("actions") %}
+                    <div class="doc-card">
+                        <h3>{{ action }}</h3>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p>No actions triggered.</p>
+                {% endif %}
+            </section>
+
+            <section class="glass section-card">
+                <h2>Extracted Fields</h2>
+                <pre>{{ fields }}</pre>
+            </section>
+
+            <section class="glass section-card">
+                <h2>Extracted Text</h2>
+                <div class="text-box">{{ doc.extracted_text }}</div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

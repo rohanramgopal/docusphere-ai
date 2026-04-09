@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Employer Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+    <div class="page-bg">
+        <nav class="navbar glass">
+            <div class="brand">Employer Dashboard</div>
+            <div class="nav-right">
+                <a href="/employer/documents" class="nav-btn">All Documents</a>
+                <a href="/logout" class="nav-btn">Logout</a>
+            </div>
+        </nav>
+
+        <main class="container">
+            <section class="glass section-card">
+                <h1>Overview</h1>
+                <p>Documents are sorted by importance so the highest-priority items appear first.</p>
+            </section>
+
+            <section class="glass section-card">
+                <h2>Recent Submissions</h2>
+                <div class="table-wrap">
+                    <table class="doc-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Priority</th>
+                                <th>Top 5 Highlights</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in documents %}
+                            <tr>
+                                <td>{{ item.doc.candidate_name }}</td>
+                                <td>{{ item.doc.document_type }}</td>
+                                <td>
+                                    <span class="badge badge-{{ item.priority }}">{{ item.priority|upper }}</span>
+                                </td>
+                                <td>{{ item.doc.summary }}</td>
+                                <td>
+                                    <a href="/employer/documents/{{ item.doc.id }}" class="small-btn">Open</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

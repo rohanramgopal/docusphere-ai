@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+    <div class="page-bg">
+        <nav class="navbar glass">
+            <div class="brand">AI Workflow Assistant</div>
+            <div class="nav-right">
+                <span>Welcome, {{ user.username }}</span>
+                <a href="/logout" class="nav-btn">Logout</a>
+            </div>
+        </nav>
+
+        <main class="container">
+            <section class="hero glass">
+                <h1>Smart Employee Document Workspace</h1>
+                <p>
+                    Upload, classify, summarize, and review business documents
+                    in one clean dashboard.
+                </p>
+                <div class="hero-actions">
+                    <a href="/documents" class="primary-btn">Open Documents</a>
+                </div>
+            </section>
+
+            <section class="upload-card glass">
+                <h2>Upload a Document</h2>
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file" required />
+                    <button type="submit">Upload File</button>
+                </form>
+                <p class="hint">Supported: PDF, TXT, DOCX, PNG, JPG, JPEG</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

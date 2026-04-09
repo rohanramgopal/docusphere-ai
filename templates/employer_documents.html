@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Employer Documents</title>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+    <div class="page-bg">
+        <nav class="navbar glass">
+            <div class="brand">Employer Portal</div>
+            <div class="nav-right">
+                <a href="/employer/dashboard" class="nav-btn">Dashboard</a>
+                <a href="/logout" class="nav-btn">Logout</a>
+            </div>
+        </nav>
+
+        <main class="container">
+            <section class="glass section-card">
+                <h1>All Uploaded Documents</h1>
+                <form action="/employer/search" method="get" class="search-form">
+                    <input type="text" name="q" placeholder="Search by type, skills, text, or keyword..." value="{{ query }}" />
+                    <button type="submit">Search</button>
+                </form>
+            </section>
+
+            {% if query and results %}
+            <section class="glass section-card">
+                <h2>Search Results</h2>
+                <div class="table-wrap">
+                    <table class="doc-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>File</th>
+                                <th>Type</th>
+                                <th>Priority</th>
+                                <th>Top 5 Highlights</th>
+                                <th>Actions</th>
+                                <th>Open</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in results %}
+                            <tr>
+                                <td>{{ item.doc.candidate_name }}</td>
+                                <td>{{ item.doc.filename }}</td>
+                                <td>{{ item.doc.document_type }}</td>
+                                <td><span class="badge badge-{{ item.priority }}">{{ item.priority|upper }}</span></td>
+                                <td>{{ item.doc.summary }}</td>
+                                <td>{{ item.actions|join(', ') }}</td>
+                                <td><a href="/employer/documents/{{ item.doc.id }}" class="small-btn">View</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            {% endif %}
+
+            <section class="glass section-card">
+                <h2>Document Queue</h2>
+                <div class="table-wrap">
+                    <table class="doc-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>File</th>
+                                <th>Type</th>
+                                <th>Priority</th>
+                                <th>Top 5 Highlights</th>
+                                <th>Triggered Actions</th>
+                                <th>Download</th>
+                                <th>Open</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in documents %}
+                            <tr>
+                                <td>{{ item.doc.candidate_name }}</td>
+                                <td>{{ item.doc.filename }}</td>
+                                <td>{{ item.doc.document_type }}</td>
+                                <td><span class="badge badge-{{ item.priority }}">{{ item.priority|upper }}</span></td>
+                                <td>{{ item.doc.summary }}</td>
+                                <td>{{ item.actions|join(', ') }}</td>
+                                <td><a href="/employer/documents/{{ item.doc.id }}/download" class="small-btn">Download</a></td>
+                                <td><a href="/employer/documents/{{ item.doc.id }}" class="small-btn">View</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
