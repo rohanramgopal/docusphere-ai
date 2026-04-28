@@ -20,51 +20,48 @@ Instead of manually reviewing files, the system automatically extracts content, 
 ```mermaid
 flowchart TD
 
-A[👤 User / Candidate] --> B[📄 Upload Portal]
+A["User or Candidate"] --> B["Upload Portal"]
 
 subgraph Frontend
-    B --> F1[Enter Name]
-    B --> F2[Upload Document]
+    B --> F1["Enter Name"]
+    B --> F2["Upload Document"]
 end
 
-B -->|HTTP Request| C[⚙️ FastAPI Backend]
+B -->|HTTP Request| C["FastAPI Backend"]
 
 subgraph Backend
-    C --> R1[Upload API]
-    C --> R2[Processing Engine]
+    C --> R1["Upload API"]
+    C --> R2["Processing Engine"]
 end
 
-subgraph AI Processing
-    R2 --> P1[📑 Text Extraction]
-    P1 --> P1A[PDF Parser]
-    P1 --> P1B[DOCX Parser]
-    P1 --> P1C[OCR - Tesseract]
+subgraph AI_Processing
+    R2 --> P1["Text Extraction"]
+    P1 --> P1A["PDF Parser"]
+    P1 --> P1B["DOCX Parser"]
+    P1 --> P1C["OCR Tesseract"]
 
-    P1 --> P2[🧠 Document Classification]
-    P2 --> P3[🔍 Field Extraction]
-    P3 --> P4[✨ Keyword Summary (Top 5)]
-    P4 --> P5[🚨 Priority Detection]
-    P5 --> P6[⚡ Action Triggering]
+    P1 --> P2["Document Classification"]
+    P2 --> P3["Field Extraction"]
+    P3 --> P4["Keyword Summary Top 5"]
+    P4 --> P5["Priority Detection"]
+    P5 --> P6["Action Triggering"]
 end
 
-P6 --> D[(🗄 Database - SQLite)]
+P6 --> D[("SQLite Database")]
 
 subgraph Storage
-    D --> S1[Documents Table]
+    D --> S1["Documents Table"]
 end
 
-D --> E[🧑‍💼 Employer Dashboard]
+D --> E["Employer Dashboard"]
 
-subgraph Employer View
-    E --> V1[View Documents]
-    E --> V2[See Type]
-    E --> V3[See Keywords]
-    E --> V4[See Priority]
-    E --> V5[Download File]
+subgraph Employer_View
+    E --> V1["View Documents"]
+    E --> V2["See Document Type"]
+    E --> V3["See Keywords"]
+    E --> V4["See Priority"]
+    E --> V5["Download File"]
 end
-
-E --> Q[❓ QA System]
-Q -->|Ask Questions| R2
 ```
 ---
 
